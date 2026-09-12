@@ -1,0 +1,94 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Giraffe</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(#87ceeb, #dff6ff);
+      font-family: Arial, sans-serif;
+    }
+
+    #giraffe {
+      position: absolute;
+      display: none;
+      width: 180px;
+      cursor: pointer;
+      user-select: none;
+      animation: popIn 0.4s ease-out;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    #message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="message">Waiting for a giraffe... 🦒</div>
+
+  <!-- Giraffe image -->
+  <img
+    id="giraffe"
+    src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg"
+    alt="Giraffe"
+  >
+
+  <script>
+    const giraffe = document.getElementById("giraffe");
+    const message = document.getElementById("message");
+
+    function speak(text) {
+      // Stop anything currently being spoken
+      speechSynthesis.cancel();
+
+      const voice = new SpeechSynthesisUtterance(text);
+
+      voice.rate = 1;
+      voice.pitch = 1;
+      voice.volume = 1;
+
+      speechSynthesis.speak(voice);
+    }
+
+    function showGiraffe() {
+      const maxX = window.innerWidth - giraffe.offsetWidth;
+      const maxY = window.innerHeight - giraffe.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      giraffe.style.left = `${x}px`;
+      giraffe.style.top = `${y}px`;
+      giraffe.style.display = "block";
+
+      message.textContent = "🦒 Hello there!";
+
+      speak("Hello there!");
+
+      //
+```
